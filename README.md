@@ -27,13 +27,29 @@ $ gradle wrapper --gradle-version 2.14.1
 
 This will generate few files in your project -- `gradlew`, `gradlew.bat`, `gradle/wrapper/gradle-wrapper.jar`, and `gradle/wrapper/gradle-wrapper.properties`. Now instead of running `gradle` you should run `gradlew`.
 
-> **Make sure to unignore `gradle-wrapper.jar` in your version control ignone file. By default, version control ignore files ignore jar files.**
+> **Make sure to unignore `gradle-wrapper.jar` in your version control ignore file. By default, version control ignore files ignore jar files.**
 
 At any point in time, if you wish to upgrade the Gradle version just regenerate the Gradle wrapper scripts passing it the Gradle version you want to use. Let's suppose we want to upgrade to Gradle `3.0-milestone-2` run the command again as shown below.
 
 ```bash
 $ gradle wrapper --gradle-version 3.0-milestone-2
 ```
+
+Alternatively, you can also create a gradle wrapper task to your build.gradle file to generate wrapper without specifying version number on CLI. Basically add this block to your gradle file:
+
+```gradle
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+}
+```
+
+And run this command to create (or update) gradle wrapper in your project:
+
+```bash
+$ gradle wrapper
+```
+
+The advantage of this approach is the ability of seeing gradle updates of your project on source control.
 
 Also, it is a good idea to set an alias for `./gradlew`.
 
